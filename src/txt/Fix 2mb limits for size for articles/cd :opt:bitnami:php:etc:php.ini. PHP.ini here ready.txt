@@ -1,0 +1,49 @@
+Для установки лимита на загрузку файлов до 10 ГБ в phpMyAdmin, необходимо изменить конфигурационные файлы PHP аналогично ранее описанному процессу, но с большими значениями.
+
+1) (AWS terminal file) cd {(MAC) MAMP/bin/php/php8.2.0/conf/php.ini} OR {(SERVER) /opt/bitnami/php/etc/php.ini}
+2) (AWS terminal Update values)
+
+1. **Измените файл `php.ini`**:
+    - Найдите и откройте файл `php.ini`. Обычно он находится в директории, где установлен PHP (например, `/etc/php/7.x/apache2/php.ini` для Ubuntu или `C:\xampp\php\php.ini` для Windows, если используете XAMPP).
+    - Найдите и измените следующие параметры на 10G:
+
+      ```ini
+      upload_max_filesize = 10G
+      post_max_size = 10G
+      max_execution_time = 3600
+      max_input_time = 3600
+      memory_limit = -1
+      ```
+
+    Эти значения означают:
+    - `upload_max_filesize` — максимальный размер загружаемого файла.
+    - `post_max_size` — максимальный размер данных POST-запроса.
+    - `max_execution_time` — максимальное время выполнения скрипта в секундах.
+    - `max_input_time` — максимальное время обработки данных ввода в секундах.
+    - `memory_limit` — максимальное количество памяти, которое может быть использовано скриптом. Значение `-1` означает неограниченное количество памяти.
+
+2. **Перезапустите веб-сервер**:
+    - Для Apache:
+      ```sh
+      sudo systemctl restart apache2
+      ```
+    - Для Nginx:
+      ```sh
+      sudo systemctl restart nginx
+      ```
+
+3. **Измените настройки конфигурации phpMyAdmin** (опционально):
+    cd MAMP/bin/phpMyAdmin5/config.inc.php
+    - В некоторых случаях, вам может понадобиться изменить файл конфигурации phpMyAdmin. Этот файл обычно называется `config.inc.php` и находится в директории phpMyAdmin.
+    - Откройте этот файл и добавьте или измените следующие параметры:
+
+      ```php
+      $cfg['UploadDir'] = '';
+      $cfg['SaveDir'] = '';
+      ```
+
+4. **Проверьте параметры в phpMyAdmin**:
+    - Перейдите в phpMyAdmin и в меню выберите "Инструменты" -> "Информация о PHP". Проверьте, что значения `upload_max_filesize` и `post_max_size` изменились на 10G.
+
+После выполнения этих шагов, лимит на загрузку файлов в phpMyAdmin будет установлен на 10 ГБ.
+

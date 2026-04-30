@@ -1,0 +1,116 @@
+Чтобы установить значение `max_allowed_packet` на 10 ГБ, нужно выполнить следующее:
+ - - -- - - - - - - - - - - - -- - -- - - -- - - -- - - - -
+   MAC
+      cd MAMP/db/mysql57/ and create here my.cnf and my.ini
+      my.cnf and my.ini (set value inside file)-> max_allowed_packet=10G
+      SET GLOBAL max_allowed_packet = 10 * 1024 * 1024 * 1024;
+      SHOW VARIABLES LIKE 'max_allowed_packet';
+  - - - --   -  -   - -- -    -  --   - - - -   -- - 
+   SERVER light sail aws
+      cd /opt/bitnami/mariadb/conf
+      sudo nano /opt/bitnami/mariadb/conf/my.ini
+      max_allowed_packet=10G
+      Сохраните файл и закройте редактор. В `nano` это делается комбинацией клавиш `Ctrl+O`, затем `Enter` для сохранения и `Ctrl+X` для выхода.
+      РЕСТАРТ
+
+   MYSQL phpmyadmin using terminal
+      /opt/bitnami/mariadb/bin/mariadb -u root -p
+      7HD+BM:c.pyn
+      SET GLOBAL max_allowed_packet = 10 * 1024 * 1024 * 1024;
+      SHOW VARIABLES LIKE 'max_allowed_packet';
+      РЕСТАРТ
+- - -- - -- --- -   - --     -  - -- - - - --  - - --  - - -
+1. **Подключитесь к MySQL через командную строку или используемое вами приложение для управления базой данных.**
+2. **Выполните команду для изменения глобального параметра `max_allowed_packet`:**
+
+   ```sql
+   SET GLOBAL max_allowed_packet = 10 * 1024 * 1024 * 1024;
+   ```
+
+3. **Убедитесь, что значение изменилось, выполнив следующую команду:**
+
+   ```sql
+   SHOW VARIABLES LIKE 'max_allowed_packet';
+   ```
+
+4. **Измените конфигурационный файл MySQL, чтобы изменения сохранились после перезапуска сервера:**
+      - Откройте конфигурационный файл MySQL (`my.cnf` или `my.ini`).
+      - Добавьте или измените строку в секции `[mysqld]`:
+
+   ```ini
+   [mysqld]
+   max_allowed_packet=10G
+   ```
+
+   5. **Перезапустите сервер MySQL:**
+
+   ```sh
+   sudo /Applications/MAMP/Library/bin/mysql.server restart
+   ```
+
+   Если вы все еще не уверены, что изменяете правильный конфигурационный файл, выполните команду:
+
+   ```sql
+   SHOW VARIABLES LIKE 'config_file';
+   ```
+
+   Это покажет путь к конфигурационному файлу, который используется сервером MySQL.
+
+   Примерно это должно выглядеть так:
+
+1. **Подключение к MySQL:**
+
+   ```sh
+   /Applications/MAMP/Library/bin/mysql -u root -p
+   ```
+
+2. **Выполнение команд:**
+
+   ```sql
+   SET GLOBAL max_allowed_packet = 10 * 1024 * 1024 * 1024;
+   SHOW VARIABLES LIKE 'max_allowed_packet';
+   ```
+
+3. **Редактирование конфигурационного файла:**
+
+      Откройте `my.cnf` или `my.ini` и добавьте/измените:
+
+   ```ini
+   [mysqld]
+   max_allowed_packet=10G
+   ```
+
+4. **Перезапуск MAMP:**
+
+   Перезапустите MAMP, чтобы убедиться, что изменения вступили в силу.
+
+Эти шаги должны помочь вам установить значение `max_allowed_packet` на 10 ГБ и избежать ошибки.
+
+---- - -- - - -- - - - -- 
+
+Конечно, давайте создадим файл `my.ini` через терминал и добавим в него строку `max_allowed_packet=10G`.
+
+Выполните следующие шаги:
+
+1. Откройте терминал и создайте (или откройте) файл `my.ini` в нужном каталоге. Например, если файл должен быть в `/opt/bitnami/mariadb/conf/`, выполните:
+
+   ```sh
+   sudo nano /opt/bitnami/mariadb/conf/my.ini
+   ```
+
+2. Добавьте в файл строку `max_allowed_packet=10G`. Файл может выглядеть следующим образом:
+
+   ```ini
+   [mysqld]
+   max_allowed_packet=10G
+   ```
+
+3. Сохраните файл и закройте редактор. В `nano` это делается комбинацией клавиш `Ctrl+O`, затем `Enter` для сохранения и `Ctrl+X` для выхода.
+
+4. Перезапустите MariaDB, чтобы изменения вступили в силу:
+
+   ```sh
+   sudo /opt/bitnami/ctlscript.sh restart mariadb
+   ```
+
+Это стандартные шаги для создания и изменения конфигурационного файла MariaDB. Если у вас возникнут какие-либо ошибки или потребуется дополнительная помощь, пожалуйста, сообщите.

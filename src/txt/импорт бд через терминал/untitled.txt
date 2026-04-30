@@ -1,0 +1,18 @@
+/opt/bitnami/mariadb/bin/mariadb -u root -p
+password : 7HD+BM:c.pyn
+
+импорт
+	upload .bd to /htodcs
+	cd htdocs
+	/opt/bitnami/mariadb/bin/mariadb -u root -p think < think\ 07.07.2024.1601.sql
+
+экспорт бд/BackUp
+	cd htdocs
+	/opt/bitnami/mariadb/bin/mysqldump -u root -p think > think_backup.sql
+
+удаление бд
+	/opt/bitnami/mariadb/bin/mariadb -u root -p
+	DROP DATABASE think;
+
+создание бд
+	CREATE DATABASE think;

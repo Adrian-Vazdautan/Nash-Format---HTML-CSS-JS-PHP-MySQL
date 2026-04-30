@@ -1,0 +1,6 @@
+!make backup of avatar folder from server
+
+#AFTER INSTALATION IN htdocs
+	0. cd htdocs
+	1. sudo chmod -R 777 src/du/avatar
+	2. sudo chmod -R 777 src/du/thumbnail
